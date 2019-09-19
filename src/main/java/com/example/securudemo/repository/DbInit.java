@@ -12,11 +12,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.securudemo.model.history.HistoryProject;
 import com.example.securudemo.model.project.Project;
 import com.example.securudemo.model.project.Requirement;
 import com.example.securudemo.model.role.Permission;
 import com.example.securudemo.model.role.RoleGroup;
 import com.example.securudemo.model.role.User;
+import com.example.securudemo.repository.history.HistoryProjectRepository;
 import com.example.securudemo.repository.project.ProjectRepository;
 import com.example.securudemo.repository.project.RequirementRepository;
 import com.example.securudemo.repository.role.PermissionRepository;
@@ -27,16 +29,22 @@ import com.example.securudemo.repository.role.UserRepository;
 public class DbInit implements CommandLineRunner{
 
 	@Autowired
-	private UserRepository userRepository;
+	UserRepository userRepository;
 	
 	@Autowired
-	private RoleGroupRepository roleGroupRepository;
+	RoleGroupRepository roleGroupRepository;
 	
 	@Autowired
-	private PermissionRepository permissionRepository;	
+	PermissionRepository permissionRepository;	
+	
+	@Autowired
+	ProjectRepository projectRepository;
+	
+	@Autowired
+	HistoryProjectRepository historyProjectRepository;
 		
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	PasswordEncoder passwordEncoder;
 	
 	@Override
 	public void run(String... args) throws ParseException {
@@ -84,6 +92,21 @@ public class DbInit implements CommandLineRunner{
 		}
 		
 		
+		//yeni proje oluşturur
+		Project pro = new Project("projectX", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), "waiting", admin);
+		projectRepository.save(pro);
+		System.out.println(projectRepository.findByProjectName("projectX"));
+		//oluşturulan projenin history verilerini kaydeder
+		HistoryProject hp = new HistoryProject(pro,new Date(System.currentTimeMillis()),admin);
+		historyProjectRepository.save(hp);
+		System.out.println(hp);
+		//projede update gerçekleşir
+		pro.setStatus("onStage");
+		projectRepository.save(pro);
+		//update'ten sonra tekrar history verileri kaydedilir
+		HistoryProject hp2 = new HistoryProject(pro,new Date(System.currentTimeMillis()),pro.getCreatedBy());
+		historyProjectRepository.save(hp2);
+		System.out.println(hp2);
 		
 		
 		
