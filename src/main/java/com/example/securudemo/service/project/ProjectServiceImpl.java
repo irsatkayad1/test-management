@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.securudemo.model.project.Project;
 import com.example.securudemo.repository.project.ProjectRepository;
+import com.example.securudemo.service.history.HistoryProjectService;
 
 @Service
 public class ProjectServiceImpl implements ProjectService{
 	
 	@Autowired
 	ProjectRepository projectRepository;
+	
+	@Autowired
+	HistoryProjectService historyProjectService;
 	
 	@Secured("ROLE_READ-PROJECT")
 	@Override
@@ -29,19 +33,22 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public void createProject(Project project) {
 		projectRepository.save(project);		
+		historyProjectService.createProject(project, project.getCreatedBy());
+		
 	}
 
 	@Secured("ROLE_DELETE-PROJECT")
 	@Override
 	public void deleteProject(Long projectId) {
+		Project deletedPro = projectRepository.findById(projectId).get();
 		projectRepository.deleteById(projectId);
+		historyProjectService.deleteProject(deletedPro, deletedPro.getCreatedBy());
 	}
 
 
 	@Override
 	public Project findByProjectName(String projectName) {
-		// TODO Auto-generated method stub
-		return null;
+		return projectRepository.findByProjectName(projectName);
 	}
 	
 }

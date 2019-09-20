@@ -93,20 +93,20 @@ public class DbInit implements CommandLineRunner{
 		
 		
 		//yeni proje oluşturur
-		Project pro = new Project("projectX", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), "waiting", admin);
-		projectRepository.save(pro);
-		System.out.println(projectRepository.findByProjectName("projectX"));
-		//oluşturulan projenin history verilerini kaydeder
-		HistoryProject hp = new HistoryProject(pro,new Date(System.currentTimeMillis()),admin);
-		historyProjectRepository.save(hp);
-		System.out.println(hp);
-		//projede update gerçekleşir
-		pro.setStatus("onStage");
-		projectRepository.save(pro);
-		//update'ten sonra tekrar history verileri kaydedilir
-		HistoryProject hp2 = new HistoryProject(pro,new Date(System.currentTimeMillis()),pro.getCreatedBy());
-		historyProjectRepository.save(hp2);
-		System.out.println(hp2);
+//		Project pro = new Project("projectX", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), "waiting", admin);
+//		projectRepository.save(pro);
+//		System.out.println(projectRepository.findByProjectName("projectX"));
+//		//oluşturulan projenin history verilerini kaydeder
+//		HistoryProject hp = new HistoryProject(pro,new Date(System.currentTimeMillis()),admin,"create");
+//		historyProjectRepository.save(hp);
+//		System.out.println(hp);
+//		//projede update gerçekleşir
+//		pro.setStatus("onStage");
+//		projectRepository.save(pro);
+//		//update'ten sonra tekrar history verileri kaydedilir
+//		HistoryProject hp2 = new HistoryProject(pro,new Date(System.currentTimeMillis()),pro.getCreatedBy(),"update");
+//		historyProjectRepository.save(hp2);
+//		System.out.println(hp2);
 		
 		
 		

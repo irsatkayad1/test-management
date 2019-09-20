@@ -28,9 +28,20 @@ public class HistoryProject{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "project")
-	private Project project;
+	@Column(name = "project_name", nullable = false)
+	private String projectName;
+	
+	@Column(name = "ex_start_date")
+	private Date exStartDate;
+		
+	@Column(name = "ex_end_date")
+	private Date exEndDate;
+	
+	@Column(name = "status", nullable = false)
+	private String status;
+	
+	@Column(name = "description")
+	private String description;
 	
 	@Column(name = "change_date")
 	private Date changeDate;
@@ -38,12 +49,20 @@ public class HistoryProject{
 	@ManyToOne
 	@JoinColumn(name = "changed_by")
 	private User changedBy;
+	
+	private String changeType; 
 
-	public HistoryProject(Project project, Date changeDate, User changedBy) {
+	public HistoryProject(Project project, Date changeDate, User changedBy, String changeType) {
 		super();
-		this.project = project;
+		this.projectName = project.getProjectName();
+		this.exStartDate = project.getExStartDate();
+		this.exEndDate = project.getExEndDate();
+		this.status = project.getStatus();
+		this.description = project.getDescription();
+		
 		this.changeDate = changeDate;
 		this.changedBy = changedBy;
+		this.changeType = changeType;
 	}
 	
 	
