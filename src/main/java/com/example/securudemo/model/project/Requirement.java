@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,7 @@ public class Requirement {
 	
 	@ManyToOne
 	@JoinColumn(name = "project_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Project project;
 
 	public Requirement(String requirementName) {
