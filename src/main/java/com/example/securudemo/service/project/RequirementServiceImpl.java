@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
+import com.example.securudemo.model.project.Project;
 import com.example.securudemo.model.project.Requirement;
 import com.example.securudemo.repository.project.RequirementRepository;
 
@@ -39,10 +40,17 @@ public class RequirementServiceImpl implements RequirementService {
 		
 	}
 	
+	@Secured("ROLE_READ-REQUIREMENT")
 	@Override
 	public Requirement findByRequirementName(String requirementName) {
 		
 		return requirementRepository.findByRequirementName(requirementName);
 		
+	}
+
+	@Override
+	public List<Requirement> findByProject(Project project) {
+		
+		return requirementRepository.findByProject(project);
 	}
 }

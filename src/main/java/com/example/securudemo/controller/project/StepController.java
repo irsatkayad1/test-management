@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.securudemo.model.project.Step;
+import com.example.securudemo.model.project.TestCase;
 import com.example.securudemo.repository.project.StepRepository;
 import com.example.securudemo.service.project.StepService;
 
@@ -42,14 +43,21 @@ public class StepController {
 		
 	}
 	
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("delete/{stepId}")
 	public void deleteStep(@PathVariable Long stepId) {
 		
 		stepService.deleteStep(stepId);
 		
 	}
 	
-	@GetMapping("get/{stepname}")
+	@GetMapping("testcasessteps")
+	public List<Step> findBytestCase(@RequestBody TestCase testCase){
+		
+		return stepService.findByTestCase(testCase);
+		
+	}
+	
+	@GetMapping("get/{stepName}")
 	public Step getStepName(@PathVariable String stepName) {
 		
 		return stepService.findByStepName(stepName);		

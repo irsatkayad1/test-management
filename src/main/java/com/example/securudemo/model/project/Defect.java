@@ -9,13 +9,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.example.securudemo.model.role.RoleGroup;
 import com.example.securudemo.model.role.User;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(name = "defect")
 public class Defect {
@@ -29,6 +30,27 @@ public class Defect {
 	
 	@Column(name = "summary")
 	private String summary;
+	
+	@Column(name = "status")	
+	private String status;
+	
+	@Column(name = "priority")
+	private String priority;
+	
+	@Column(name = "version")
+	private String version;
+	
+	@Column(name = "phase_found")
+	private String phaseFound;
+	
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "developer_comment")
+	private String developerComment;
+	
+	@Column(name = "type")
+	private String type;
 	
 	@ManyToOne
 	@JoinColumn(name = "created_by")
@@ -49,4 +71,13 @@ public class Defect {
 	@ManyToOne
 	@JoinColumn(name = "project")
 	private Project project;
+	
+	@ManyToOne
+	@JoinColumn(name = "assigneeTo")
+	private User assigneeTo;
+	
+	@ManyToOne
+	@JoinColumn(name = "assignee_to_group")
+	private RoleGroup assigneeToGroup;
+		
 }

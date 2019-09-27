@@ -2,6 +2,7 @@ package com.example.securudemo.service.project;
 
 import java.util.List;
 
+import com.example.securudemo.model.project.Requirement;
 import com.example.securudemo.model.project.TestCase;
 
 public interface TestCaseService {
@@ -13,4 +14,6 @@ public interface TestCaseService {
 	void createTestCase(TestCase testCase);
 
 	void deleteTestCase(Long testCaseId);
+	
+	List<TestCase> findByRequirement(Requirement requirement);
 }

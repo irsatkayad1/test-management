@@ -2,6 +2,7 @@ package com.example.securudemo.service.project;
 
 import java.util.List;
 
+import com.example.securudemo.model.project.Project;
 import com.example.securudemo.model.project.Requirement;
 
 public interface RequirementService {
@@ -13,6 +14,8 @@ public interface RequirementService {
 	void deleteRequirement(Long requirementId);
 	
 	Requirement findByRequirementName(String requirementName);
+
+	List<Requirement> findByProject(Project project);
 	
 	
 }

@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -50,15 +48,14 @@ public class Project {
 	@JoinColumn(name = "created_by")
 	private User createdBy;
 
-	public Project(String projectName, Date exStartDate, Date exEndDate, String status,
-			User createdBy) {
+	public Project(String projectName, Date exStartDate, Date exEndDate, String status) {
 		super();
 		this.projectName = projectName;
 		this.exStartDate = exStartDate;
 		this.createDate = new Date(System.currentTimeMillis());
 		this.exEndDate = exEndDate;
 		this.status = status;
-		this.createdBy = createdBy;
+		
 	}
 	
 }

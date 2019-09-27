@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
 import org.springframework.stereotype.Service;
+
+import com.example.securudemo.model.project.Requirement;
 import com.example.securudemo.model.project.TestCase;
 import com.example.securudemo.repository.project.TestCaseRepository;
 
@@ -46,6 +48,13 @@ public class TestCaseServiceImpl implements TestCaseService {
 		
 		return testCaseRepository.findAll();
 		
+	}
+
+
+	@Override
+	public List<TestCase> findByRequirement(Requirement requirement) {
+		
+		return testCaseRepository.findByRequirement(requirement);
 	}
 	
 }

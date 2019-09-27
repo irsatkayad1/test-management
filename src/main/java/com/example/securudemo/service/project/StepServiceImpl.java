@@ -7,6 +7,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.example.securudemo.model.project.Step;
+import com.example.securudemo.model.project.TestCase;
 import com.example.securudemo.repository.project.StepRepository;
 
 @Service
@@ -15,7 +16,7 @@ public class StepServiceImpl implements StepService {
 	@Autowired
 	StepRepository stepRepository;
 	
-	@Secured("ROLE_READPROJECT")
+	@Secured("ROLE_CREATE-STEP")
 	@Override
 	public void createStep(Step step) {
 		
@@ -23,7 +24,7 @@ public class StepServiceImpl implements StepService {
 		
 	}
 	
-	@Secured("ROLE_READPROJECT")
+	@Secured("ROLE_DELETE-STEP")
 	@Override
 	public void deleteStep(Long stepId) {
 		
@@ -31,7 +32,7 @@ public class StepServiceImpl implements StepService {
 		
 	}
 	
-	@Secured("ROLE_READPROJECT")
+	@Secured("ROLE_READ-STEP")
 	@Override
 	public Step findByStepName(String stepName) {
 		
@@ -39,11 +40,18 @@ public class StepServiceImpl implements StepService {
 	
 	}
 	
-	@Secured("ROLE_READPROJECT")
+	@Secured("ROLE_READ-STEP")
 	@Override
 	public List<Step> getAllSteps() {
 		
 		return stepRepository.findAll();
 	
+	}
+
+	@Secured("ROLE_READ-STEP")
+	@Override
+	public List<Step> findByTestCase(TestCase testCase) {
+		// TODO Auto-generated method stub
+		return stepRepository.findBytestCase(testCase);
 	}
 }

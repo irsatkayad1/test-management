@@ -31,7 +31,13 @@ public class UserPrincipal implements UserDetails {
     
     
     
-    @Override
+    public UserPrincipal() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	@Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
         List<GrantedAuthority> authorities = new ArrayList<>();
         

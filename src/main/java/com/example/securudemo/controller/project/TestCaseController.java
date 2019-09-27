@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.securudemo.model.project.Requirement;
 import com.example.securudemo.model.project.TestCase;
 import com.example.securudemo.repository.project.TestCaseRepository;
 import com.example.securudemo.service.project.TestCaseService;
@@ -35,6 +36,13 @@ public class TestCaseController {
 		
 	}
 	
+	@GetMapping("requirementstestcases")
+	public List<TestCase> findByRequirement(@RequestBody Requirement requirement){
+		
+		return testCaseService.findByRequirement(requirement);
+		
+	}
+	
 	@PostMapping("create")
 	public void createTestCase(@RequestBody TestCase testCase) {
 		
@@ -49,7 +57,7 @@ public class TestCaseController {
 		
 	}
 	
-	@GetMapping("get/{testcasename}")
+	@GetMapping("get/{testCaseName}")
 	public TestCase getTestCaseByTestCaseName(@PathVariable String testCaseName) {
 		
 		return testCaseService.findByTestCaseName(testCaseName);		
@@ -62,7 +70,7 @@ public class TestCaseController {
 			testCase.setTestCaseName(newTestCase.getTestCaseName());
 			testCase.setDescription(newTestCase.getDescription());
 			testCase.setStatus(newTestCase.getStatus());
-			testCase.setRequirements(newTestCase.getRequirements());
+			testCase.setRequirement(newTestCase.getRequirement());
 			testCase.setType(newTestCase.getType());
 			return testCaseRepository.save(testCase);
 		}).orElseGet(()->{

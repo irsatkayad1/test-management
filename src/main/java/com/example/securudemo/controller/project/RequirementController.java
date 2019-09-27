@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.securudemo.model.project.Project;
 import com.example.securudemo.model.project.Requirement;
 import com.example.securudemo.repository.project.RequirementRepository;
 import com.example.securudemo.service.project.RequirementService;
@@ -43,9 +44,16 @@ public class RequirementController {
 	}
 	
 	@DeleteMapping("delete/{id}")
-	public void delRequirement(@PathVariable Long requirementId) {
+	public void delRequirement(@PathVariable Long id) {
 		
-		requirementService.deleteRequirement(requirementId);
+		requirementService.deleteRequirement(id);
+		
+	}
+	
+	@GetMapping("projectreqs")
+	public List<Requirement> findByProject(@RequestBody Project project){
+		
+		return requirementService.findByProject(project);
 		
 	}
 	

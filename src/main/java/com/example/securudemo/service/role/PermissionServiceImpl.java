@@ -41,8 +41,8 @@ public class PermissionServiceImpl implements PermissionService{
 
 	@Override
 	public Permission findByPermissionName(String permissionName) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return permissionRepository.findByPermissionName(permissionName);
 	}
 	
 	

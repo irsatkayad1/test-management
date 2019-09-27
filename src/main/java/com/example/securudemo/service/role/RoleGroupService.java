@@ -14,7 +14,7 @@ public interface RoleGroupService {
 	
 	void deleteRoleGroup(Long roleGroupId);
 
-	RoleGroup findByRoleGroupName(String roleGroupName);
+	List<RoleGroup> findByRoleGroupName(String roleGroupName);
 	
 	
 }

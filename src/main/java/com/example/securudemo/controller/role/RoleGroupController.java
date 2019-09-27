@@ -43,7 +43,7 @@ public class RoleGroupController {
 		
 	}
 	
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("delete/{roleGroupId}")
 	public void deleteRoleGroup(@PathVariable Long roleGroupId) {
 		
 		roleGroupService.deleteRoleGroup(roleGroupId);
@@ -51,7 +51,7 @@ public class RoleGroupController {
 	}
 	
 	@GetMapping("get/{roleGroupName}")
-	public RoleGroup getRoleGroupName(@PathVariable String roleGroupName) {
+	public List<RoleGroup> getRoleGroupName(@PathVariable String roleGroupName) {
 		
 		return roleGroupService.findByRoleGroupName(roleGroupName);
 		

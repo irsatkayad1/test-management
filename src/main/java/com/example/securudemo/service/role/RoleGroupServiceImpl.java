@@ -57,10 +57,11 @@ public class RoleGroupServiceImpl implements RoleGroupService{
 		
 	}
 
+	@Secured("ROLE_READ-ROLEGROUP")
 	@Override
-	public RoleGroup findByRoleGroupName(String roleGroupName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RoleGroup> findByRoleGroupName(String roleGroupName) {
+		
+		return roleGroupRepository.findByRoleGroupName(roleGroupName);
 	}
 	
 }

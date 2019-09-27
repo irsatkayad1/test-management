@@ -49,18 +49,19 @@ public class DbInit implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws ParseException {
 		
-		userRepository.deleteAll();
-		roleGroupRepository.deleteAll();
-		permissionRepository.deleteAll();
+		//userRepository.deleteAll();
+		//roleGroupRepository.deleteAll();
+		//permissionRepository.deleteAll();
 		
 		List<String> perms = Arrays.asList("CREATE-USER","READ-USER","UPDATE-USER","DELETE-USER",
-											"CREATE-ROLEGROUP","READ-ROLEGROUP","UPDATE-ROLEGROUP","DELETEROLEGROUP",
+											"CREATE-ROLEGROUP","READ-ROLEGROUP","UPDATE-ROLEGROUP","DELETE-ROLEGROUP",
 											"CREATE-PERMISSION","READ-PERMISSION","UPDATE-PERMISSION","DELETE-PERMISSION",
 											"CREATE-PROJECT","READ-PROJECT","UPDATE-PROJECT","DELETE-PROJECT",
 											"CREATE-REQUIREMENT","READ-REQUIREMENT","UPDATE-REQUIREMENT","DELETE-REQUIREMENT",
 											"CREATE-TESTCASE","READ-TESTCASE","UPDATE-TESTCASE","DELETE-TESTCASE",
 											"CREATE-STEP","READ-STEP","UPDATE-STEP","DELETE-STEP",
-											"CREATE-MILESTONE","READ-MILESTONE","UPDATE-MILESTONE","DELETE-MILESTONE");
+											"CREATE-MILESTONE","READ-MILESTONE","UPDATE-MILESTONE","DELETE-MILESTONE",
+											"CREATE-DEFECT","READ-DEFECT","UPDATE-DEFECT","DELETE-DEFECT");
 	 
 
 		List<String> userPerms = Arrays.asList("CREATE-USER","READ-USER","UPDATE-USER","DELETE-USER");
@@ -79,17 +80,20 @@ public class DbInit implements CommandLineRunner{
 
 		List<String> mileStonePerms = Arrays.asList("CREATE-MILESTONE","READ-MILESTONE","UPDATE-MILESTONE","DELETE-MILESTONE");
 		
-				
-		User admin = new User("admin", passwordEncoder.encode("admin"));
-		userRepository.save(admin);
+		List<String> defectPerms = Arrays.asList("CREATE-DEFECT","READ-DEFECT","UPDATE-DEFECT","DELETE-DEFECT");
+			
 		
-		RoleGroup rg = new RoleGroup("ADMIN", admin);
-		roleGroupRepository.save(rg);
-		
-		for (String perm : perms) {
-			Permission permission = new Permission(perm, rg);
-			permissionRepository.save(permission);
-		}
+		//database create edildikten sonra her açılışında tekrar üretilmesine gerek yok **line : 87-96**
+//		User admin = new User("admin", passwordEncoder.encode("admin"));
+//		userRepository.save(admin);
+//		
+//		RoleGroup rg = new RoleGroup("ADMIN", admin);
+//		roleGroupRepository.save(rg);
+//		
+//		for (String perm : perms) {
+//			Permission permission = new Permission(perm, rg);
+//			permissionRepository.save(permission);
+//		}
 		
 		
 		//yeni proje oluşturur
